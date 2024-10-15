@@ -1,0 +1,47 @@
+@charset "UTF-8";
+#maru {
+	width: 100px;
+	cursor: pointer;
+	margin: auto;
+    display: block;
+}
+table {
+	border-collapse: collapse;
+	margin: auto;
+	margin-top: 10px;
+}
+table td, table th {
+	padding: 5px;
+}
+table th {
+	border-right: 1px solid orange;
+	padding-right: 10px;
+}
+table td {
+	padding-left: 10px;
+}
+table #id {
+	width: 200px;
+}
+table .pwd {
+	width: 250px;
+}
+table #selectEmail {
+	width: 150px;
+}
+table .addrInput {
+	width: 500px;
+}
+table .tel {
+	width: 70px;
+}
+div {
+	color: red;
+	font-size: 8pt;
+	font-weight: bold;
+}
+.btn {
+	background-color: orange;
+	border-color: orange;
+	color: white;
+}

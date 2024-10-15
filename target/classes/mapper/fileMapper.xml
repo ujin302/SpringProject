@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="user.dao.UserFileUploadDAO"> <!-- 인터페이스에서 바로 접근 -->
+<!-- 	<insert id="fileUpload" parameterType="UserFileUploadDTO">
+		insert into userFileUpload values(
+									#{seq}, 
+									#{imageName}, 
+									#{imageContent},
+									#{imageFileName},
+									#{imageOriginalName}
+								)
+	</insert> -->
+	
+	<insert id="fileUpload" parameterType="UserFileUploadDTO">
+		insert into userFileUpload(imageName, imageContent, imageFileName, imageOriginalName) values
+		<foreach collection="list" item="dto" separator=",">
+			(
+				#{dto.imageName}, 
+				#{dto.imageContent},
+				#{dto.imageFileName},
+				#{dto.imageOriginalName}
+			)
+		</foreach>
+	</insert>
+	<!-- 
+		collection="list" >> list or collection
+		item="dto" >> 변수명 
+	-->
+	
+	<select id="list" resultType="UserFileUploadDTO">
+		select * from userFileUpload
+	</select>
+	
+	<select id="getTotalA" resultType="int">
+		select count(*) as c from userFileUpload
+	</select>
+	
+	<select id="fileInfo" resultType="UserFileUploadDTO">
+		select * from userFileUpload where seq = #{seq}
+	</select>
+	
+	<select id="getImageFileName">
+		select imageFileName from userFileUpload where seq = #{seq}
+	</select>
+	
+	<update id="update" parameterType="UserFileUploadDTO">
+		update userFileUpload set imageName = #{imageName},
+								  imageContent = #{imageContent},
+								  imageFileName = #{imageFileName},
+								  imageOriginalName = #{imageOriginalName}
+		where seq = #{seq}
+	</update>
+	
+	<delete id="delete" parameterType="list">
+	    DELETE FROM userFileUpload WHERE seq IN
+	    <foreach collection="list" item="data" open="(" separator="," close=")">
+	        #{data}
+	    </foreach>
+	</delete>
+</mapper>	
+		
